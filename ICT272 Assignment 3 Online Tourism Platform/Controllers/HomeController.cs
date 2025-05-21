@@ -77,7 +77,11 @@ public class HomeController : Controller
         var existingUser = _context.User.FirstOrDefault(u => u.Email == user.Email && u.Password == hashedPassword);
         if (existingUser != null)
         {
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Email) };
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Role, existingUser.Role) // Add the role claim
+            };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
