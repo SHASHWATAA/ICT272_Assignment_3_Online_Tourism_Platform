@@ -42,7 +42,19 @@
 	                </li>
 
                     @if (User.Identity.IsAuthenticated)
-                    {
+                    {   
+                        if (User.IsInRole("Tourist"))
+                        {
+                            <li>Welcome, Tourist!</li>
+                        }
+                        else if (User.IsInRole("TourGuide"))
+                        {
+                            <li>Welcome, Tour Guide!</li>
+                        }
+                        else if (User.IsInRole("Agency"))
+                        {
+                            <li>Welcome, Agency!</li>
+                        }
                         <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                     }
                     else
