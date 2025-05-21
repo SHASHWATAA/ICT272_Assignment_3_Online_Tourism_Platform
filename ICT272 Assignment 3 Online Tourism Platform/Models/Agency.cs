@@ -7,7 +7,7 @@ public class Agency
 {
     public int Id { get; set; }
 
-    [Required]
+    
     public string AgencyName { get; set; }
 
     public string Description { get; set; }

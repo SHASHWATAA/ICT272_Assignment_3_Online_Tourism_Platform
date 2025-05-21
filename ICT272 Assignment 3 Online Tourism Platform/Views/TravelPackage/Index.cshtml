@@ -1,72 +1,31 @@
 @model IEnumerable<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackage>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Browse Tours";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DurationDays)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxGroupSize)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agency)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DurationDays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxGroupSize)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agency.AgencyName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<h2 class="mt-4 mb-4">Browse Tours</h2>
+<div class="row">
+	@foreach (var tour in Model)
+	{
+		<div class="col-md-4 mb-4">
+			<div class="card h-100 shadow">
+				@if (!string.IsNullOrEmpty(tour.ImageUrl))
+				{
+					<img src="@tour.ImageUrl" class="card-img-top" style="height: 200px; object-fit: cover;" alt="@tour.Title" />
+				}
+				<div class="card-body d-flex flex-column">
+					<h5 class="card-title">@tour.Title</h5>
+					<p class="card-text">@tour.Description</p>
+					<ul class="list-group list-group-flush mb-3">
+						<li class="list-group-item">Price: <b>$@tour.Price</b></li>
+						<li class="list-group-item">Duration: <b>@tour.DurationDays days</b></li>
+						<li class="list-group-item">Max Group Size: <b>@tour.MaxGroupSize</b></li>
+						<li class="list-group-item">Agency: <b>@(tour.Agency != null ? tour.Agency.AgencyName : "N/A")</b></li>
+					</ul>
+					<a href="@Url.Action("Create", "Booking", new { travelPackageId = tour.Id })" class="btn btn-primary mt-auto">Book</a>
+				</div>
+			</div>
+		</div>
+	}
+</div>

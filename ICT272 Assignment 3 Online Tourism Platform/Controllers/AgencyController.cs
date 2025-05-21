@@ -59,6 +59,10 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,AgencyName,Description,ServicesOffered,ImageUrl,UserId")] Agency agency)
         {
+
+            ModelState.Remove("User");           // if removed, will cause validation error with db
+            ModelState.Remove("TravelPackages");  // if removed, will cause validation error with db,  you can use ModelState.Remove similarly if (ModelState.IsValid) is being false and not reading keys from the model, not professional fix, but will do for our purposes
+
             if (ModelState.IsValid)
             {
                 _context.Add(agency);
