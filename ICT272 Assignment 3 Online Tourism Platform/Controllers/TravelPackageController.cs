@@ -59,6 +59,12 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,ImageUrl,DurationDays,Price,MaxGroupSize,AgencyId")] TravelPackage travelPackage)
         {
+
+            ModelState.Remove("AvailableDates");  // if removed, will cause validation error with db
+            ModelState.Remove("Feedbacks");    // if removed, will cause validation error with db
+            ModelState.Remove("Bookings");    // if removed, will cause validation error with db
+            ModelState.Remove("Agency");      // if removed, will cause validation error with db , you can use ModelState.Remove similarly if (ModelState.IsValid) is being false and not reading keys from the model, not professional fix, but will do for our purposes
+
             if (ModelState.IsValid)
             {
                 _context.Add(travelPackage);
@@ -97,6 +103,13 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
             {
                 return NotFound();
             }
+
+
+            ModelState.Remove("AvailableDates");  // if removed, will cause validation error with db
+            ModelState.Remove("Feedbacks");    // if removed, will cause validation error with db
+            ModelState.Remove("Bookings");    // if removed, will cause validation error with db
+            ModelState.Remove("Agency");      // if removed, will cause validation error with db , you can use ModelState.Remove similarly if (ModelState.IsValid) is being false and not reading keys from the model, not professional fix, but will do for our purposes
+
 
             if (ModelState.IsValid)
             {
@@ -155,6 +168,14 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> AdminIndex()
+        {
+            var travelPackages = _context.TravelPackage.Include(t => t.Agency);
+            return View(await travelPackages.ToListAsync());
+        }
+
+
 
         private bool TravelPackageExists(int id)
         {
