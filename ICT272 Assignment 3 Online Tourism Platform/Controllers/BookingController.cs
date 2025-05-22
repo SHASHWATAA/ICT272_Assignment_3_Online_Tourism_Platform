@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ICT272_Assignment_3_Online_Tourism_Platform.Data;
 using ICT272_Assignment_3_Online_Tourism_Platform.Models;
+using System.Security.Claims;
 
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
 {
@@ -61,6 +62,29 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TouristId,TravelPackageId,BookingDate,Status,PaymentReceived")] Booking booking)
         {
+            string userIdStr = User.FindFirst("UserId")?.Value;
+            if (string.IsNullOrEmpty(userIdStr))
+            {
+                // User not logged in or claim missing
+                ModelState.AddModelError("", "You must be logged in.");
+                return View(booking);
+            }
+            int userId = int.Parse(userIdStr); // Only do this if your UserId is an int
+
+            var tourist = await _context.Tourist.FirstOrDefaultAsync(t => t.UserId == userId);
+            if (tourist == null)
+            {
+                ModelState.AddModelError("", "Tourist profile not found.");
+                return View(booking);
+            }
+            booking.TouristId = tourist.Id;
+
+
+
+            ModelState.Remove("Tourist");
+            ModelState.Remove("TravelPackage");
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(booking);

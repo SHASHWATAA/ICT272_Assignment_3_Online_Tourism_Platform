@@ -7,6 +7,26 @@
       "RelativeMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|solutionrelative:ict272 assignment 3 online tourism platform\\controllers\\travelpackagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|c:\\users\\vasil\\documents actual\\github\\ict272_assignment_3_online_tourism_platform\\ict272 assignment 3 online tourism platform\\views\\booking\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|solutionrelative:ict272 assignment 3 online tourism platform\\views\\booking\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|c:\\users\\vasil\\documents actual\\github\\ict272_assignment_3_online_tourism_platform\\ict272 assignment 3 online tourism platform\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|solutionrelative:ict272 assignment 3 online tourism platform\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|c:\\users\\vasil\\documents actual\\github\\ict272_assignment_3_online_tourism_platform\\ict272 assignment 3 online tourism platform\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|solutionrelative:ict272 assignment 3 online tourism platform\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|c:\\users\\vasil\\documents actual\\github\\ict272_assignment_3_online_tourism_platform\\ict272 assignment 3 online tourism platform\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|solutionrelative:ict272 assignment 3 online tourism platform\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|c:\\users\\vasil\\documents actual\\github\\ict272_assignment_3_online_tourism_platform\\ict272 assignment 3 online tourism platform\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|solutionrelative:ict272 assignment 3 online tourism platform\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|c:\\users\\vasil\\documents actual\\github\\ict272_assignment_3_online_tourism_platform\\ict272 assignment 3 online tourism platform\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{B281E740-B832-48C2-A575-F3E873BFEBE9}|ICT272 Assignment 3 Online Tourism Platform\\ICT272 Assignment 3 Online Tourism Platform.csproj|solutionrelative:ict272 assignment 3 online tourism platform\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -38,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,20 +78,85 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Models\\User.cs",
+              "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Models\\User.cs",
+              "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T08:51:04.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Models\\Booking.cs",
+              "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Models\\Booking.cs",
+              "ToolTip": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Models\\Booking.cs",
+              "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Models\\Booking.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T07:59:25.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAUwDQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T07:47:01.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BookingController.cs",
+              "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Controllers\\BookingController.cs",
+              "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Controllers\\BookingController.cs",
+              "ToolTip": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Controllers\\BookingController.cs",
+              "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Controllers\\BookingController.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAqwFAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T07:29:36.829Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Views\\Booking\\Create.cshtml",
+              "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Views\\Booking\\Create.cshtml",
+              "ToolTip": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Views\\Booking\\Create.cshtml",
+              "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Views\\Booking\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T07:18:11.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "TravelPackageController.cs",
               "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Controllers\\TravelPackageController.cs",
               "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Controllers\\TravelPackageController.cs",
               "ToolTip": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Controllers\\TravelPackageController.cs",
               "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Controllers\\TravelPackageController.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAQwGQAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAcwHAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-21T09:28:44.811Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "Agency.cs",
               "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Models\\Agency.cs",
               "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Models\\Agency.cs",
@@ -79,12 +164,11 @@
               "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Models\\Agency.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T08:04:47.962Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T08:04:47.962Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "AgencyController.cs",
               "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Controllers\\AgencyController.cs",
               "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Controllers\\AgencyController.cs",
@@ -92,12 +176,11 @@
               "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Controllers\\AgencyController.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAwwD8AAAANAQAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T08:08:41.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T08:08:41.938Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Views\\Agency\\Create.cshtml",
               "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Views\\Agency\\Create.cshtml",
@@ -105,12 +188,11 @@
               "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Views\\Agency\\Create.cshtml",
               "ViewState": "AgIAABIAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T07:59:20.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T07:59:20.337Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Views\\TravelPackage\\Index.cshtml",
               "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Views\\TravelPackage\\Index.cshtml",
@@ -118,25 +200,24 @@
               "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Views\\TravelPackage\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T07:35:15.93Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T07:35:15.93Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAADwvycAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-05-21T04:52:32.727Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "AdminIndex.cshtml",
               "DocumentMoniker": "C:\\Users\\vasil\\Documents Actual\\GitHub\\ICT272_Assignment_3_Online_Tourism_Platform\\ICT272 Assignment 3 Online Tourism Platform\\Views\\TravelPackage\\AdminIndex.cshtml",
               "RelativeDocumentMoniker": "ICT272 Assignment 3 Online Tourism Platform\\Views\\TravelPackage\\AdminIndex.cshtml",
@@ -144,8 +225,7 @@
               "RelativeToolTip": "ICT272 Assignment 3 Online Tourism Platform\\Views\\TravelPackage\\AdminIndex.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T10:53:14.596Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-21T10:53:14.596Z"
             }
           ]
         }
