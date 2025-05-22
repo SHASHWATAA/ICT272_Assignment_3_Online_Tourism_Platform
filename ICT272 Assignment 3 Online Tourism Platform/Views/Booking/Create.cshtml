@@ -11,35 +11,48 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TouristId" class="control-label"></label>
-                <select asp-for="TouristId" class ="form-control" asp-items="ViewBag.TouristId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="TravelPackageId" class="control-label"></label>
-                <select asp-for="TravelPackageId" class ="form-control" asp-items="ViewBag.TravelPackageId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="BookingDate" class="control-label"></label>
-                <input asp-for="BookingDate" class="form-control" />
-                <span asp-validation-for="BookingDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="PaymentReceived" /> @Html.DisplayNameFor(model => model.PaymentReceived)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+	    <form asp-action="Create">
+		    @* For debugging: Show user claims - remove/comment out in production *@
+		    @* 
+    @foreach (var claim in User.Claims)
+    {
+        <div>@claim.Type = @claim.Value</div>
+    }
+    *@
+
+		    @{
+			    var travelPackage = ViewBag.TravelPackage as ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackage;
+		    }
+		    @if (travelPackage != null)
+		    {
+			    <div class="alert alert-info mb-2">
+				    <strong>Tour Duration:</strong> @travelPackage.DurationDays days
+			    </div>
+		    }
+
+		    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+		    <!-- Hidden: TravelPackageId -->
+		    <input type="hidden" asp-for="TravelPackageId" value="@ViewData["TravelPackageId"]" />
+
+		    <!-- Hidden: Status (always Pending when booking) -->
+		    <input type="hidden" asp-for="Status" value="Pending" />
+
+		    <!-- Hidden: PaymentReceived (always false at creation) -->
+		    <input type="hidden" asp-for="PaymentReceived" value="false" />
+
+		    <!-- Booking Date dropdown (required) -->
+		    <div class="form-group">
+			    <label asp-for="BookingDate" class="control-label">Choose Date</label>
+			    <select asp-for="BookingDate" class="form-control" asp-items="ViewBag.AvailableDates"></select>
+			    <span asp-validation-for="BookingDate" class="text-danger"></span>
+		    </div>
+
+		    <div class="form-group">
+			    <input type="submit" value="Create" class="btn btn-primary"/>
+		    </div>
+	    </form>
+
     </div>
 </div>
 

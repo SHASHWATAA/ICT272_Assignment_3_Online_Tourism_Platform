@@ -48,6 +48,21 @@ public class HomeController : Controller
             user.Password = GetMd5Hash(user.Password);
             _context.User.Add(user);
             _context.SaveChanges();
+
+            //   Assign User a TouristId
+            if (user.Role == "Tourist")
+            {
+                // Create Tourist record for this user
+                var tourist = new Tourist
+                {
+                    UserId = user.Id
+                    // Set any other properties if needed
+                };
+                _context.Tourist.Add(tourist);
+                _context.SaveChanges();
+            }
+
+
             return RedirectToAction("Login");
         }
         return View(user);
@@ -80,7 +95,8 @@ public class HomeController : Controller
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Role, existingUser.Role) // Add the role claim
+                new Claim(ClaimTypes.Role, existingUser.Role), // Add the role claim
+                new Claim("UserId", existingUser.Id.ToString())
             };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
