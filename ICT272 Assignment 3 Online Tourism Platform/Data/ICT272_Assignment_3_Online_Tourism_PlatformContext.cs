@@ -21,5 +21,8 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Data
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.Tourist> Tourist { get; set; } = default!;
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackage> TravelPackage { get; set; } = default!;
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.User> User { get; set; } = default!;
+        public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackageDate> TravelPackageDate { get; set; } = default!;
+
+
     }
 }

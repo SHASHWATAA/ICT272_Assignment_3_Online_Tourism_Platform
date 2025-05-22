@@ -48,12 +48,12 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         }
 
         // GET: Booking/Create
-        public IActionResult Create()
+       /* public IActionResult Create()
         {
             ViewData["TouristId"] = new SelectList(_context.Set<Tourist>(), "Id", "Id");
             ViewData["TravelPackageId"] = new SelectList(_context.Set<TravelPackage>(), "Id", "Title");
             return View();
-        }
+        } */
 
         // POST: Booking/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -78,6 +78,27 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
                 return View(booking);
             }
             booking.TouristId = tourist.Id;
+
+
+            // Validate selected BookingDate is available 
+            bool isDateAvailable = _context.TravelPackageDate.Any(d =>
+                d.TravelPackageId == booking.TravelPackageId && d.Date == booking.BookingDate);
+
+            if (!isDateAvailable)
+            {
+                ModelState.AddModelError("BookingDate", "Selected date is not available for this tour.");
+
+                // Re-populate dropdowns and return the view
+                ViewData["AvailableDates"] = new SelectList(
+                    _context.TravelPackageDate
+                        .Where(d => d.TravelPackageId == booking.TravelPackageId)
+                        .Select(d => d.Date)
+                        .OrderBy(d => d)
+                        .Select(d => d.ToString("yyyy-MM-dd"))
+                );
+                ViewData["TravelPackageId"] = booking.TravelPackageId;
+                return View(booking);
+            }
 
 
 
@@ -190,5 +211,29 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         {
             return _context.Booking.Any(e => e.Id == id);
         }
+
+        public IActionResult Create(int? travelPackageId)
+        {
+            if (travelPackageId == null)
+                return NotFound();
+
+            var availableDates = _context.TravelPackageDate
+                .Where(d => d.TravelPackageId == travelPackageId)
+                .Select(d => d.Date)
+                .OrderBy(d => d)
+                .ToList();
+
+            ViewData["AvailableDates"] = new SelectList(availableDates.Select(d => d.ToString("yyyy-MM-dd")));
+
+            ViewData["TravelPackageId"] = travelPackageId;
+
+            var travelPackage = _context.TravelPackage
+                .FirstOrDefault(tp => tp.Id == travelPackageId);
+
+            ViewBag.TravelPackage = travelPackage;
+
+            return View();
+        }
+
     }
 }

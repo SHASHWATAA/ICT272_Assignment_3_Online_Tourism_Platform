@@ -3,6 +3,7 @@ using System;
 using ICT272_Assignment_3_Online_Tourism_Platform.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Migrations
 {
     [DbContext(typeof(ICT272_Assignment_3_Online_Tourism_PlatformContext))]
-    partial class ICT272_Assignment_3_Online_Tourism_PlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20250522123338_AddTravelPackageDate")]
+    partial class AddTravelPackageDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.16");
