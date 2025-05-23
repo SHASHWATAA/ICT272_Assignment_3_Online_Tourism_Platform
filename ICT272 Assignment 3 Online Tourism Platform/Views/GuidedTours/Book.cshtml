@@ -1,0 +1,30 @@
+@model IEnumerable<ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTours>
+
+@{
+ViewData["Title"] = "Travel Packages";
+}
+
+<h2 class="mt-4 mb-4">Travel Packages</h2>
+<div class="row">
+    @foreach (var guidedTour in Model)
+    {
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow">
+            @if (!string.IsNullOrEmpty(guidedTour.ImageUrl))
+            {
+            <img src="@guidedTour.ImageUrl" class="card-img-top" style="height: 200px; object-fit: cover;" alt="@guidedTour.Title" />
+            }
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">@guidedTour.Title</h5>
+                <p class="card-text">@guidedTour.Description</p>
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item">Price: <b>$@guidedTour.Price</b></li>
+                    <li class="list-group-item">Duration: <b>@guidedTour.DurationDays days</b></li>
+                    <li class="list-group-item">Max Group Size: <b>@guidedTour.MaxGroupSize</b></li>
+                </ul>
+                <a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = guidedTour.Id })" class="btn btn-primary mt-auto">Book</a>
+            </div>
+        </div>
+    </div>
+    }
+</div>

@@ -1,0 +1,42 @@
+@model ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedToursDate
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>GuidedToursDate</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="GuidedToursId" class="control-label"></label>
+                <select asp-for="GuidedToursId" class="form-control" asp-items="ViewBag.GuidedToursId"></select>
+                <span asp-validation-for="GuidedToursId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TourGuideAgencyId" class="control-label"></label>
+                <select asp-for="TourGuideAgencyId" class="form-control" asp-items="ViewBag.TourGuideAgencyId"></select>
+                <span asp-validation-for="TourGuideAgencyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

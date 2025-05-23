@@ -22,8 +22,15 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         // GET: GuidedToursDate
         public async Task<IActionResult> Index()
         {
-            var iCT272_Assignment_3_Online_Tourism_PlatformContext = _context.GuidedToursDate.Include(g => g.GuidedTours).Include(g => g.TourGuideAgency);
-            return View(await iCT272_Assignment_3_Online_Tourism_PlatformContext.ToListAsync());
+            // var iCT272_Assignment_3_Online_Tourism_PlatformContext = _context.GuidedToursDate.Include(g => g.GuidedTours).Include(g => g.TourGuideAgency);
+            
+            var guidedToursDates = _context.GuidedToursDate
+                .Include(g => g.GuidedTours)
+                .Include(g => g.TourGuideAgency)
+                .ThenInclude(t => t.User);
+
+            
+            return View(await guidedToursDates.ToListAsync());
         }
 
         // GET: GuidedToursDate/Details/5
@@ -50,7 +57,12 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         public IActionResult Create()
         {
             ViewData["GuidedToursId"] = new SelectList(_context.GuidedTours, "Id", "Title");
-            ViewData["TourGuideAgencyId"] = new SelectList(_context.TourGuideAgency, "Id", "Id");
+            
+            var tourGuideAgencies = _context.TourGuideAgency
+                .Include(t => t.User) // Include the User navigation property
+                .ToList();
+            
+            ViewData["TourGuideAgencyId"] = new SelectList(_context.TourGuideAgency, "Id", "User.FullName");
             return View();
         }
 
@@ -68,7 +80,13 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["GuidedToursId"] = new SelectList(_context.GuidedTours, "Id", "Title", guidedToursDate.GuidedToursId);
-            ViewData["TourGuideAgencyId"] = new SelectList(_context.TourGuideAgency, "Id", "Id", guidedToursDate.TourGuideAgencyId);
+            
+            var tourGuideAgencies = _context.TourGuideAgency
+                .Include(t => t.User) // Include the User navigation property
+                .ToList();
+
+            
+            ViewData["TourGuideAgencyId"] = new SelectList(_context.TourGuideAgency, "Id", "User.FullName", guidedToursDate.TourGuideAgencyId);
             return View(guidedToursDate);
         }
 
@@ -86,7 +104,12 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
                 return NotFound();
             }
             ViewData["GuidedToursId"] = new SelectList(_context.GuidedTours, "Id", "Title", guidedToursDate.GuidedToursId);
-            ViewData["TourGuideAgencyId"] = new SelectList(_context.TourGuideAgency, "Id", "Id", guidedToursDate.TourGuideAgencyId);
+            
+            var tourGuideAgencies = _context.TourGuideAgency
+                .Include(t => t.User) // Include the User navigation property
+                .ToList();
+            
+            ViewData["TourGuideAgencyId"] = new SelectList(_context.TourGuideAgency, "Id", "User.FullName", guidedToursDate.TourGuideAgencyId);
             return View(guidedToursDate);
         }
 
@@ -123,7 +146,12 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["GuidedToursId"] = new SelectList(_context.GuidedTours, "Id", "Title", guidedToursDate.GuidedToursId);
-            ViewData["TourGuideAgencyId"] = new SelectList(_context.TourGuideAgency, "Id", "Id", guidedToursDate.TourGuideAgencyId);
+            
+            var tourGuideAgencies = _context.TourGuideAgency
+                .Include(t => t.User) // Include the User navigation property
+                .ToList();
+            
+            ViewData["TourGuideAgencyId"] = new SelectList(_context.TourGuideAgency, "Id", "User.FullName", guidedToursDate.TourGuideAgencyId);
             return View(guidedToursDate);
         }
 
