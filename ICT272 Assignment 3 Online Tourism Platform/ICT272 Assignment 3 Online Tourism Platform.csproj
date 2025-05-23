@@ -34,6 +34,11 @@
       <_ContentIncludedByDefault Remove="Views\User\Details.cshtml" />
       <_ContentIncludedByDefault Remove="Views\User\Edit.cshtml" />
       <_ContentIncludedByDefault Remove="Views\User\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TourGuideAgency\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TourGuideAgency\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TourGuideAgency\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TourGuideAgency\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TourGuideAgency\Index.cshtml" />
     </ItemGroup>
 
 </Project>

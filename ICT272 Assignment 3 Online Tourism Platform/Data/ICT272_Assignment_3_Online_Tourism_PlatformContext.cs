@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ICT272_Assignment_3_Online_Tourism_Platform.Models;
+using ICT272_Assignment_3_Online_Tourism_Platform.Controllers;
 
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Data
 {
@@ -22,6 +23,9 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Data
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackage> TravelPackage { get; set; } = default!;
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.User> User { get; set; } = default!;
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackageDate> TravelPackageDate { get; set; } = default!;
+        public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Controllers.TourGuideAgency> TourGuideAgency { get; set; } = default!;
+        public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTours> GuidedTours { get; set; } = default!;
+        public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedToursDate> GuidedToursDate { get; set; } = default!;
 
 
     }

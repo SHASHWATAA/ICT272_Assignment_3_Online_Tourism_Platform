@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/ICT272_Assignment_3_Online_Tourism_Platform.styles.css" asp-append-version="true"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400&display=swap" rel="stylesheet">
+
 </head>
 <body>
 <header>
@@ -22,8 +25,14 @@
 	                <li class="nav-item">
 		                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 	                </li>
+					
+	                @* Show these links ONLY to logged-in users *@
+	                @if (User.Identity.IsAuthenticated) 
+	                
+	                {
+
 	                <li class="nav-item">
-		                <a class="nav-link" asp-controller="TravelPackage" asp-action="Index">Browse Tours</a>
+		                <a class="nav-link" asp-controller="TravelPackage" asp-action="Index">Travel Packages</a>
 	                </li>
 	                <li class="nav-item">
 		                <a class="nav-link" asp-controller="Booking" asp-action="Index">Bookings</a>
@@ -34,36 +43,39 @@
 	                <li class="nav-item">
 		                <a class="nav-link" asp-controller="Agency" asp-action="Index">Agencies</a>
 	                </li>
-	                <li class="nav-item">
-		                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-	                </li>
 	                
 	                <li class="nav-item">
 		                <a class="nav-link" asp-controller="TravelPackage" asp-action="AdminIndex">Admin Tours</a>
 	                </li>
-	                
+	                }
+					
 
-                    @if (User.Identity.IsAuthenticated)
-                    {   
-                        if (User.IsInRole("Tourist"))
-                        {
-                            <li>Welcome, Tourist!</li>
-                        }
-                        else if (User.IsInRole("TourGuide"))
-                        {
-                            <li>Welcome, Tour Guide!</li>
-                        }
-                        else if (User.IsInRole("Agency"))
-                        {
-                            <li>Welcome, Agency!</li>
-                        }
-                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
-                        <li>@Html.ActionLink("Register", "Register", "Home")</li>
-                    }
+	                <li class="nav-item">
+		                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+	                </li>
+
+	                @* Auth section: Roles + Login/Logout/Register *@
+	                @if (User.Identity.IsAuthenticated)
+	                {
+		                if (User.IsInRole("Tourist"))
+		                {
+			                <li class="nav-item">Welcome, Tourist!</li>
+		                }
+		                else if (User.IsInRole("TourGuide"))
+		                {
+			                <li class="nav-item">Welcome, Tour Guide!</li>
+		                }
+		                else if (User.IsInRole("Agency"))
+		                {
+			                <li class="nav-item">Welcome, Agency!</li>
+		                }
+		                <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link" })</li>
+	                }
+	                else
+	                {
+		                <li class="nav-item">@Html.ActionLink("Login", "Login", "Home", null, new { @class = "nav-link" })</li>
+		                <li class="nav-item">@Html.ActionLink("Register", "Register", "Home", null, new { @class = "nav-link" })</li>
+	                }
                 </ul>
             </div>
         </div>

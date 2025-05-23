@@ -20,3 +20,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.jumbotron {
+    background: linear-gradient(120deg, #007bff 0%, #00c6ff 100%);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
