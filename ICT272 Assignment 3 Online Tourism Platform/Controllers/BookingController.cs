@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ICT272_Assignment_3_Online_Tourism_Platform.Data;
 using ICT272_Assignment_3_Online_Tourism_Platform.Models;
+using System.Security.Claims;
 
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
 {
@@ -47,12 +48,12 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         }
 
         // GET: Booking/Create
-        public IActionResult Create()
+       /* public IActionResult Create()
         {
             ViewData["TouristId"] = new SelectList(_context.Set<Tourist>(), "Id", "Id");
             ViewData["TravelPackageId"] = new SelectList(_context.Set<TravelPackage>(), "Id", "Title");
             return View();
-        }
+        } */
 
         // POST: Booking/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -61,6 +62,50 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TouristId,TravelPackageId,BookingDate,Status,PaymentReceived")] Booking booking)
         {
+            string userIdStr = User.FindFirst("UserId")?.Value;
+            if (string.IsNullOrEmpty(userIdStr))
+            {
+                // User not logged in or claim missing
+                ModelState.AddModelError("", "You must be logged in.");
+                return View(booking);
+            }
+            int userId = int.Parse(userIdStr); // Only do this if your UserId is an int
+
+            var tourist = await _context.Tourist.FirstOrDefaultAsync(t => t.UserId == userId);
+            if (tourist == null)
+            {
+                ModelState.AddModelError("", "Tourist profile not found.");
+                return View(booking);
+            }
+            booking.TouristId = tourist.Id;
+
+
+            // Validate selected BookingDate is available 
+            bool isDateAvailable = _context.TravelPackageDate.Any(d =>
+                d.TravelPackageId == booking.TravelPackageId && d.Date == booking.BookingDate);
+
+            if (!isDateAvailable)
+            {
+                ModelState.AddModelError("BookingDate", "Selected date is not available for this tour.");
+
+                // Re-populate dropdowns and return the view
+                ViewData["AvailableDates"] = new SelectList(
+                    _context.TravelPackageDate
+                        .Where(d => d.TravelPackageId == booking.TravelPackageId)
+                        .Select(d => d.Date)
+                        .OrderBy(d => d)
+                        .Select(d => d.ToString("yyyy-MM-dd"))
+                );
+                ViewData["TravelPackageId"] = booking.TravelPackageId;
+                return View(booking);
+            }
+
+
+
+            ModelState.Remove("Tourist");
+            ModelState.Remove("TravelPackage");
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(booking);
@@ -166,5 +211,29 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         {
             return _context.Booking.Any(e => e.Id == id);
         }
+
+        public IActionResult Create(int? travelPackageId)
+        {
+            if (travelPackageId == null)
+                return NotFound();
+
+            var availableDates = _context.TravelPackageDate
+                .Where(d => d.TravelPackageId == travelPackageId)
+                .Select(d => d.Date)
+                .OrderBy(d => d)
+                .ToList();
+
+            ViewData["AvailableDates"] = new SelectList(availableDates.Select(d => d.ToString("yyyy-MM-dd")));
+
+            ViewData["TravelPackageId"] = travelPackageId;
+
+            var travelPackage = _context.TravelPackage
+                .FirstOrDefault(tp => tp.Id == travelPackageId);
+
+            ViewBag.TravelPackage = travelPackage;
+
+            return View();
+        }
+
     }
 }

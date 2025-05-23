@@ -32,4 +32,7 @@ public class TravelPackage
     public ICollection<AvailableDate> AvailableDates { get; set; }
 
     public ICollection<Feedback> Feedbacks { get; set; }
+
+    public ICollection<TravelPackageDate> TravelPackageDates { get; set; }
+
 }
