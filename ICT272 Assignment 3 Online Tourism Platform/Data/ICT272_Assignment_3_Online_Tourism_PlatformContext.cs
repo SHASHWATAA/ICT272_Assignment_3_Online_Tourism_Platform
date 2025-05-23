@@ -26,6 +26,7 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Data
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Controllers.TourGuideAgency> TourGuideAgency { get; set; } = default!;
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTours> GuidedTours { get; set; } = default!;
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedToursDate> GuidedToursDate { get; set; } = default!;
+        public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTourBooking> GuidedTourBooking { get; set; } = default!;
 
 
     }

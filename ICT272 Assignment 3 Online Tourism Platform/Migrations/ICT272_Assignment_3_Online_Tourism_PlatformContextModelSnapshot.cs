@@ -151,6 +151,30 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Migrations
                     b.ToTable("Feedback");
                 });
 
+            modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTourBooking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("BookingDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("GuidedToursDateId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GuidedToursDateId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("GuidedTourBooking");
+                });
+
             modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTours", b =>
                 {
                     b.Property<int>("Id")
@@ -383,6 +407,25 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Migrations
                     b.Navigation("Tourist");
 
                     b.Navigation("TravelPackage");
+                });
+
+            modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTourBooking", b =>
+                {
+                    b.HasOne("ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedToursDate", "GuidedToursDate")
+                        .WithMany()
+                        .HasForeignKey("GuidedToursDateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ICT272_Assignment_3_Online_Tourism_Platform.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GuidedToursDate");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedToursDate", b =>
