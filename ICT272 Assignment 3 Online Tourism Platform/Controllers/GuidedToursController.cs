@@ -18,11 +18,19 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         {
             _context = context;
         }
+        
 
         // GET: GuidedTours
         public async Task<IActionResult> Index()
         {
             return View(await _context.GuidedTours.ToListAsync());
+        }
+        
+        //Get: GuidedTours/Book
+        public async Task<IActionResult> Book()
+        {
+            var guidedTours = await _context.GuidedTours.ToListAsync();
+            return View(guidedTours); // This will look for Views/GuidedTours/Book.cshtml
         }
 
         // GET: GuidedTours/Details/5

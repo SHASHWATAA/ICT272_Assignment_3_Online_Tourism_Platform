@@ -57,16 +57,28 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         }
 
         // GET: GuidedTourBooking/Create
-        public IActionResult Create()
+        public IActionResult Create(int? userId, int? guidedTourId)
         {
-            
-            var guidedToursDates = _context.GuidedToursDate
-                .Include(g => g.GuidedTours)
-                .ToList();
-            
-            ViewData["GuidedToursDateId"] = new SelectList(_context.GuidedToursDate, "Id", "GuidedTours.Title");
+            var guidedTours = _context.GuidedTours.ToList();
+            ViewData["GuidedTours"] = new SelectList(guidedTours, "Id", "Title");
             ViewData["UserId"] = new SelectList(_context.User, "Id", "Email");
+
+            ViewBag.PreselectedTourId = guidedTourId;
+            ViewBag.PreselectedUserId = userId;
+
             return View();
+        }
+        
+        [HttpGet]
+        public JsonResult GetDatesByTourId(int tourId)
+        {
+            var dates = _context.GuidedToursDate
+                .Where(d => d.GuidedToursId == tourId)
+                .OrderBy(d => d.Date)
+                .Select(d => new { d.Id, Date = d.Date.ToString("yyyy-MM-dd") })
+                .ToList();
+
+            return Json(dates);
         }
 
         // POST: GuidedTourBooking/Create
