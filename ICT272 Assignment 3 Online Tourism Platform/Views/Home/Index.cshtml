@@ -1,4 +1,5 @@
-﻿@model IEnumerable<FeaturedGuidedTours>
+﻿@model ICT272_Assignment_3_Online_Tourism_Platform.Models.HomeIndexViewModel
+
 
 @{
 	ViewData["Title"] = "Home";
@@ -20,46 +21,12 @@
 		</p>
 	</div>
 
-	
-	<!-- Add this after the closing </div> of your jumbotron and before <h2 class="mt-5">Featured Tours</h2> -->
-
-	<div class="row my-5">
-		<!-- Guided Tours Card -->
-		<div class="col-md-6 mb-4">
-			<div class="card shadow-sm border-0 h-100">
-				<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-				     class="card-img-top" alt="Guided Tours" style="height:220px;object-fit:cover;">
-				<div class="card-body">
-					<h4 class="card-title">Guided Tours</h4>
-					<p class="card-text">
-						Explore destinations with expert local guides for a more immersive experience.
-					</p>
-					<a href="@Url.Action("Book", "GuidedTours")" class="btn btn-outline-primary">Browse Guided Tours</a>
-				</div>
-			</div>
-		</div>
-		<!-- Agency Tours Card -->
-		<div class="col-md-6 mb-4">
-			<div class="card shadow-sm border-0 h-100">
-				<img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
-				     class="card-img-top" alt="Agency Tours" style="height:220px;object-fit:cover;">
-				<div class="card-body">
-					<h4 class="card-title">Travel Packages</h4>
-					<p class="card-text">
-						Find curated packages from our partner agencies for every travel style.
-					</p>
-					<a href="@Url.Action("Index", "TravelPackage")" class="btn btn-outline-success">Browse Travel Packages</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
 
 	<h2 class="text-center mt-5 " style="font-family:'Montserrat', Arial,sans-serif;">Featured Tours</h2>
 	<div class="row">
-		@if (Model != null && Model.Any())
+		@if (Model != null)
 		{
-			foreach (var item in Model)
+			foreach (var item in Model.FeaturedTours)
 			{
 				var tour = item.GuidedTour;
 				<div class="col-md-4">
@@ -92,6 +59,73 @@
 	</div>
 </div>
 
+
+<h2 class="text-center mt-5 " style="font-family:'Montserrat', Arial,sans-serif;">Upcoming Tours</h2>
+<div class="row">
+	@if (Model.UpcomingTours != null && Model.UpcomingTours.Any())
+	{
+		foreach (var tourDate in Model.UpcomingTours)
+		{
+			var tour = tourDate.GuidedTours;
+			<div class="col-md-4">
+				<div class="card mb-4">
+					<img class="card-img-top" src="@tour.ImageUrl" style="height: 200px;object-fit: cover;" alt="@tour.Title">
+					<div class="card-body">
+						<h5 class="card-title">@tour.Title</h5>
+						<p class="card-text">@tour.Description</p>
+						<p><strong>Date:</strong> @tourDate.Date.ToString("dd MMM yyyy")</p>
+						<div class="d-flex justify-content-between">
+							<a href="/TravelPackage/Details/@tour.Id" class="btn btn-primary">View Details</a>
+							<a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = tour.Id })" class="btn btn-success">Book</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	}
+	else
+	{
+		<div class="col-12 text-center">
+			<p>No upcoming tours available.</p>
+		</div>
+	}
+</div>
+
+
+<h2 class="text-center mt-5 " style="font-family:'Montserrat', Arial,sans-serif;">View All Services</h2>
+<div class="row my-5">
+	<!-- Guided Tours Card -->
+	<div class="col-md-6 mb-4">
+		<div class="card shadow-sm border-0 h-100">
+			<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+			     class="card-img-top" alt="Guided Tours" style="height:220px;object-fit:cover;">
+			<div class="card-body">
+				<h4 class="card-title">Guided Tours</h4>
+				<p class="card-text">
+					Explore destinations with expert local guides for a more immersive experience.
+				</p>
+				<a href="@Url.Action("Book", "GuidedTours")" class="btn btn-outline-primary">Browse Guided Tours</a>
+			</div>
+		</div>
+	</div>
+	<!-- Agency Tours Card -->
+	<div class="col-md-6 mb-4">
+		<div class="card shadow-sm border-0 h-100">
+			<img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
+			     class="card-img-top" alt="Agency Tours" style="height:220px;object-fit:cover;">
+			<div class="card-body">
+				<h4 class="card-title">Travel Packages</h4>
+				<p class="card-text">
+					Find curated packages from our partner agencies for every travel style.
+				</p>
+				<a href="@Url.Action("Index", "TravelPackage")" class="btn btn-outline-success">Browse Travel Packages</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
 <!-- Testimonials Section -->
 <div class="container my-5">
 	
@@ -119,7 +153,7 @@
 	<div class="row justify-content-center">
 		<div class="col-md-3 mb-4">
 			<div class="card shadow">
-				<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Mountains">
+				<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" style="height:220px;object-fit:cover;" class="card-img-top" alt="Mountains">
 				<div class="card-body text-center">
 					<h6 class="card-title mb-0">Blue Mountains</h6>
 				</div>
@@ -127,7 +161,7 @@
 		</div>
 		<div class="col-md-3 mb-4">
 			<div class="card shadow">
-				<img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Reef">
+				<img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" style="height:220px;object-fit:cover;" class="card-img-top" alt="Reef">
 				<div class="card-body text-center">
 					<h6 class="card-title mb-0">Great Barrier Reef</h6>
 				</div>
@@ -135,7 +169,7 @@
 		</div>
 		<div class="col-md-3 mb-4">
 			<div class="card shadow">
-				<img src="https://images.unsplash.com/photo-1496939376851-89342e90adcd?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Reef">
+				<img src="https://images.unsplash.com/photo-1496939376851-89342e90adcd?auto=format&fit=crop&w=400&q=80" style="height:220px;object-fit:cover;" class="card-img-top" alt="Reef">
 				<div class="card-body text-center">
 					<h6 class="card-title mb-0">Singapore</h6>
 				</div>
@@ -143,7 +177,7 @@
 		</div>
 		<div class="col-md-3 mb-4">
 			<div class="card shadow">
-				<img src="https://plus.unsplash.com/premium_photo-1697730198238-48ee2f2fe1b7?auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Reef">
+				<img src="https://plus.unsplash.com/premium_photo-1697730198238-48ee2f2fe1b7?auto=format&fit=crop&w=400&q=80" style="height:220px;object-fit:cover;" class="card-img-top" alt="Reef">
 				<div class="card-body text-center">
 					<h6 class="card-title mb-0">Sydney City</h6>
 				</div>

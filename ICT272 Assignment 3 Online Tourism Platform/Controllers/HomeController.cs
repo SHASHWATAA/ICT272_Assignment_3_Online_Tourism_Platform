@@ -28,8 +28,22 @@ public class HomeController : Controller
             .Include(f => f.GuidedTour)
             .ToList();
 
-        return View(featuredTours);
+        var upcomingTours = _context.GuidedToursDate
+            .Include(gtd => gtd.GuidedTours)
+            .Where(gtd => gtd.Date >= DateTime.Today)
+            .OrderBy(gtd => gtd.Date)
+            .Take(3)
+            .ToList();
+
+        var viewModel = new HomeIndexViewModel
+        {
+            FeaturedTours = featuredTours,
+            UpcomingTours = upcomingTours
+        };
+
+        return View(viewModel);
     }
+
 
     public IActionResult Privacy()
     {
