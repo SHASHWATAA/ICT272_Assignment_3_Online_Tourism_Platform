@@ -17,6 +17,8 @@
         <th>Booking Made</th>
         <th>Rating</th>
         <th>Feedback</th>
+        <th>Confirmation Status</th>
+        <th>Payment Status</th>
         <th></th>
     </tr>
     </thead>
@@ -38,6 +40,12 @@
             </td>
             <td>
                 @(item.BookingFeedback?.FeedbackText ?? "-")
+            </td>
+            <td>
+                @(item.BookingStatus?.PaymentStatus.ToString() ?? "-")
+            </td>
+            <td>
+                @(item.BookingStatus?.ConfirmationStatus.ToString() ?? "-")
             </td>
             <td>
                 <a asp-controller="GuidedTourBooking" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -74,6 +82,8 @@
         <th>Booking Made</th>
         <th>Rating</th>
         <th>Feedback</th>
+        <th>Confirmation Status</th>
+        <th>Payment Status</th>
         <th></th>
     </tr>
     </thead>
@@ -95,6 +105,12 @@
             </td>
             <td>
                 @(item.BookingFeedback?.FeedbackText ?? "-")
+            </td>
+            <td>
+                @(item.BookingStatus?.PaymentStatus.ToString() ?? "-")
+            </td>
+            <td>
+                @(item.BookingStatus?.ConfirmationStatus.ToString() ?? "-")
             </td>
             <td>
                 <a asp-controller="TravelPackagesBooking" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

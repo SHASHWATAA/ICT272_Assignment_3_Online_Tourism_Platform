@@ -31,6 +31,7 @@ public class CombinedBookingsController : Controller
             .Include(g => g.GuidedToursDate.TourGuideAgency)
                 .ThenInclude(a => a.User)
             .Include(g => g.BookingFeedback)
+            .Include(g => g.BookingStatus)
             .Where(g => g.UserId == userId)
             .ToList();
     
@@ -41,6 +42,7 @@ public class CombinedBookingsController : Controller
             .Include(t => t.TravelPackagesDate.Agency)
                 .ThenInclude(a => a.User)
             .Include(g => g.BookingFeedback)
+            .Include(g => g.BookingStatus)
             .Where(t => t.UserId == userId)
             .ToList();
     

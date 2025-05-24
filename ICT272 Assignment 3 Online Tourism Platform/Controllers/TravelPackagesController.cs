@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ICT272_Assignment_3_Online_Tourism_Platform.Data;
 using ICT272_Assignment_3_Online_Tourism_Platform.Models;
+using ICT272_Assignment_3_Online_Tourism_Platform.ViewModels;
 
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
 {
@@ -22,8 +23,30 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         // GET: TravelPackages
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TravelPackages.ToListAsync());
+            // Get all packages
+            var packages = await _context.TravelPackages.ToListAsync();
+
+            // Get booking counts per package
+            var bookingCounts = await _context.TravelPackagesBooking
+                .Include(b => b.TravelPackagesDate)
+                .GroupBy(b => b.TravelPackagesDate.Id)
+                .Select(g => new { TravelPackageId = g.Key, Count = g.Count() })
+                .ToListAsync();
+
+            // Combine into view model
+            var viewModel = packages.Select(pkg =>
+            {
+                var count = bookingCounts.FirstOrDefault(b => b.TravelPackageId == pkg.Id)?.Count ?? 0;
+                return new TravelPackageWithBookingCount
+                {
+                    Package = pkg,
+                    BookingCount = count
+                };
+            }).ToList();
+
+            return View(viewModel);
         }
+
         
         //Get: TravelPackages/Book
         public async Task<IActionResult> Book()

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ICT272_Assignment_3_Online_Tourism_Platform.Data;
 using ICT272_Assignment_3_Online_Tourism_Platform.Models;
+using ICT272_Assignment_3_Online_Tourism_Platform.ViewModels;
 
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
 {
@@ -23,8 +24,27 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
         // GET: GuidedTours
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GuidedTours.ToListAsync());
+            var packages = await _context.GuidedTours.ToListAsync();
+
+            var bookingCounts = _context.GuidedTourBooking
+                .Include(b => b.GuidedToursDate)
+                .GroupBy(b => b.GuidedToursDate.Id)
+                .Select(g => new { GuidedTourId = g.Key, Count = g.Count() })
+                .ToList();
+
+            var viewModel = packages.Select(pkg =>
+            {
+                var count = bookingCounts.FirstOrDefault(b => b.GuidedTourId == pkg.Id)?.Count ?? 0;
+                return new GuidedToursWithBookingCount
+                {
+                    Package = pkg,
+                    BookingCount = count
+                };
+            }).ToList();
+
+            return View(viewModel);
         }
+
         
         //Get: GuidedTours/Book
         public async Task<IActionResult> Book()

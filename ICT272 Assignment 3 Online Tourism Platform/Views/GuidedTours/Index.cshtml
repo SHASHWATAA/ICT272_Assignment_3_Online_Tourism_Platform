@@ -1,4 +1,5 @@
-@model IEnumerable<ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTours>
+@model IEnumerable<ICT272_Assignment_3_Online_Tourism_Platform.ViewModels.GuidedToursWithBookingCount>
+
 
 @{
     ViewData["Title"] = "Index";
@@ -14,23 +15,24 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.Package.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Package.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
+                @Html.DisplayNameFor(model => model.Package.ImageUrl)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DurationDays)
+                @Html.DisplayNameFor(model => model.Package.DurationDays)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Package.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaxGroupSize)
+                @Html.DisplayNameFor(model => model.Package.MaxGroupSize)
             </th>
+            <th>Booking Count</th>
             <th></th>
         </tr>
     </thead>
@@ -38,27 +40,28 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @Html.DisplayFor(modelItem => item.Package.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Package.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                @Html.DisplayFor(modelItem => item.Package.ImageUrl)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DurationDays)
+                @Html.DisplayFor(modelItem => item.Package.DurationDays)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Package.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaxGroupSize)
+                @Html.DisplayFor(modelItem => item.Package.MaxGroupSize)
             </td>
+            <td>@item.BookingCount</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Package.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Package.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Package.Id">Delete</a>
             </td>
         </tr>
 }
