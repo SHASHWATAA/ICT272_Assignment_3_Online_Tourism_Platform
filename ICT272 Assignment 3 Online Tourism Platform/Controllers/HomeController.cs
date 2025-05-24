@@ -101,7 +101,7 @@ public class HomeController : Controller
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-            return RedirectToAction("Index", "User");
+            return RedirectToAction("Index", "Home");
         }
 
         ViewBag.Error = "Invalid credentials";
