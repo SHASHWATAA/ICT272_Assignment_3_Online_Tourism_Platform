@@ -22,7 +22,14 @@ ViewData["Title"] = "Travel Packages";
                     <li class="list-group-item">Duration: <b>@guidedTour.DurationDays days</b></li>
                     <li class="list-group-item">Max Group Size: <b>@guidedTour.MaxGroupSize</b></li>
                 </ul>
-                <a href="@Url.Action("Create", "TravelPackagesBooking", new { guidedTourId = guidedTour.Id })" class="btn btn-primary mt-auto">Book</a>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Tourist"))
+                {
+                    <a href="@Url.Action("Create", "TravelPackagesBooking", new { guidedTourId = guidedTour.Id })" class="btn btn-success mt-auto">Book</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Register", "Home")" class="btn btn-success">Register and Book</a>
+                }
             </div>
         </div>
     </div>

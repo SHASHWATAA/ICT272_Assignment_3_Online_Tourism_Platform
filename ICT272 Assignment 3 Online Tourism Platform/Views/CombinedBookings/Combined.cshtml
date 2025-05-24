@@ -1,0 +1,70 @@
+@model ICT272_Assignment_3_Online_Tourism_Platform.ViewModels.CombinedBookingsViewModel
+
+@{
+    ViewData["Title"] = "All Your Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Your Guided Tour Bookings</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>User</th>
+        <th>Title</th>
+        <th>Tour Guide</th>
+        <th>Tour Date</th>
+        <th>Booking Made</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.GuidedTourBookings)
+    {
+        <tr>
+            <td>@item.User.FullName</td>
+            <td>@item.GuidedToursDate.GuidedTours.Title</td>
+            <td>@item.GuidedToursDate.TourGuideAgency.User.FullName</td>
+            <td>@item.GuidedToursDate.Date.ToShortDateString()</td>
+            <td>@item.BookingDate.ToShortDateString()</td>
+            <td>
+                <a asp-controller="GuidedTourBooking" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="GuidedTourBooking" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-controller="GuidedTourBooking" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h1>Your Travel Package Bookings</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>User</th>
+        <th>Title</th>
+        <th>Tour Guide</th>
+        <th>Package Date</th>
+        <th>Booking Made</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.TravelPackageBookings)
+    {
+        <tr>
+            <td>@item.User.FullName</td>
+            <td>@item.TravelPackagesDate.TravelPackages.Title</td>
+            <td>@item.TravelPackagesDate.Agency.User.FullName</td>
+            <td>@item.TravelPackagesDate.Date.ToShortDateString()</td>
+            <td>@item.BookingDate.ToShortDateString()</td>
+            <td>
+                <a asp-controller="TravelPackagesBooking" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="TravelPackagesBooking" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-controller="TravelPackagesBooking" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,3 +1,5 @@
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTourBooking
 
 @{
@@ -13,50 +15,74 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <span>PreselectedUserId</span>
-                <span>"@ViewBag.PreselectedUserId"</span>
-                <span>@(ViewBag.PreselectedUserId == null ? "true" : "false")</span>
-                @if (ViewBag.PreselectedUserId != null)
-                {
-                    var preselectedUser = ((SelectList)ViewBag.UserId)
-                        .FirstOrDefault(u => u.Value == ViewBag.PreselectedUserId.ToString());
 
-                    <select asp-for="UserId" class="form-control">
-                        <option value="@preselectedUser?.Value">@preselectedUser?.Text</option>
-                    </select>
-                }
-                else
-                {
-                    <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                }
-            </div>
-            <div class="form-group">
-                <label asp-for="GuidedToursDateId" class="control-label"></label>
-                <span>PreselectedTourId</span>
-                <span>"@ViewBag.PreselectedTourId"</span>
-                <span>@(ViewBag.PreselectedTourId == null ? "true" : "false")</span>
+            @{
+                var userId = User.FindFirstValue("UserId");
+            }
+            
+            
+            @if (userId == null)
+            {
+                <div class="form-group">
+                    <label asp-for="UserId" class="control-label"></label>
+                    <span>PreselectedUserId</span>
+                    <span>"@ViewBag.PreselectedUserId"</span>
+                    <span>@(ViewBag.PreselectedUserId == null ? "true" : "false")</span>
+                    @if (ViewBag.PreselectedUserId != null)
+                    {
+                        var preselectedUser = ((SelectList)ViewBag.UserId)
+                            .FirstOrDefault(u => u.Value == ViewBag.PreselectedUserId.ToString());
 
-                @if (ViewBag.PreselectedTourId != null)
-                {
-                    <select id="guidedTourSelect" name="GuidedToursDateId" class="form-control">
-                        <option value="@ViewBag.PreselectedTourId" selected>
-                            @(((SelectList)ViewBag.GuidedTours).FirstOrDefault(t => t.Value == ViewBag.PreselectedTourId?.ToString())?.Text ?? "Selected Tour")
-                        </option>
-                    </select>
-                }
-                else
-                {
-                    <select id="guidedTourSelect" name="GuidedToursDateId" class="form-control">
-                        <option value="">-- Select Tour --</option>
-                        @foreach (var tour in (SelectList)ViewBag.GuidedTours)
-                        {
-                            <option value="@tour.Value">@tour.Text</option>
-                        }
-                    </select>
-                }
-            </div>
+                        <select asp-for="UserId" class="form-control">
+                            <option value="@preselectedUser?.Value">@preselectedUser?.Text</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GuidedToursDateId" class="control-label"></label>
+                    <span>PreselectedTourId</span>
+                    <span>"@ViewBag.PreselectedTourId"</span>
+                    <span>@(ViewBag.PreselectedTourId == null ? "true" : "false")</span>
+
+                    @if (ViewBag.PreselectedTourId != null)
+                    {
+                        <select id="guidedTourSelect" name="GuidedToursDateId" class="form-control">
+                            <option value="@ViewBag.PreselectedTourId" selected>
+                                @(((SelectList)ViewBag.GuidedTours).FirstOrDefault(t => t.Value == ViewBag.PreselectedTourId?.ToString())?.Text ?? "Selected Tour")
+                            </option>
+                        </select>
+                    }
+                    else
+                    {   
+                        <select id="guidedTourSelect" name="GuidedToursDateId" class="form-control">
+                            <option value="">-- Select Tour --</option>
+                            @foreach (var tour in (SelectList)ViewBag.GuidedTours)
+                            {
+                                <option value="@tour.Value">@tour.Text</option>
+                            }
+                        </select>
+                    }
+                </div>
+            }
+            else
+            {
+                <input type="hidden" name="UserId" value="@ViewBag.PreselectedUserId" />
+                <p>User: @(((SelectList)ViewBag.UserId).FirstOrDefault(u => u.Value == ViewBag.PreselectedUserId.ToString())?.Text)</p>
+                
+                <!-- Hidden input to ensure it's submitted -->
+                <input type="hidden" name="GuidedToursDateId" value="@ViewBag.PreselectedTourId" />
+                
+                <div class="form-group">
+                    <span>Select dates for @(((SelectList)ViewBag.GuidedTours).FirstOrDefault(t => t.Value == ViewBag.PreselectedTourId?.ToString())?.Text ?? "Selected Tour")</span>
+                    <br>
+                </div>
+            }
+
             <div class="form-group">
                 <label>Available Dates</label>
                 <select id="dateSelect" name="GuidedToursDateId" class="form-control">

@@ -1,4 +1,6 @@
-﻿@model ICT272_Assignment_3_Online_Tourism_Platform.Models.HomeIndexViewModel
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ICT272_Assignment_3_Online_Tourism_Platform.Models.HomeIndexViewModel
 
 
 @{
@@ -43,7 +45,18 @@
 							<p class="card-text">@tour.Description</p>
 							<div class="d-flex justify-content-between">
 								<a href="/GuidedTours/Details/@tour.Id" class="btn btn-primary">View Details</a>
-								<a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = tour.Id })" class="btn btn-success">Book</a>
+								@{
+									var userId = User.FindFirstValue("UserId");
+								}
+
+								@if (User.Identity.IsAuthenticated && User.IsInRole("Tourist"))
+								{
+									<a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = tour.Id, userId = userId })" class="btn btn-success">Book</a>
+								}
+								else
+								{
+									<a href="@Url.Action("Register", "Home")" class="btn btn-success">Register and Book</a>
+								}
 							</div>
 						</div>
 					</div>
@@ -75,8 +88,19 @@
 						<p class="card-text">@tour.Description</p>
 						<p><strong>Date:</strong> @tourDate.Date.ToString("dd MMM yyyy")</p>
 						<div class="d-flex justify-content-between">
-							<a href="/TravelPackage/Details/@tour.Id" class="btn btn-primary">View Details</a>
-							<a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = tour.Id })" class="btn btn-success">Book</a>
+							<a href="/GuidedTours/Details/@tour.Id" class="btn btn-primary">View Details</a>
+							
+							@{
+								var userId = User.FindFirstValue("UserId");
+							}
+							@if (User.Identity.IsAuthenticated && User.IsInRole("Tourist"))
+							{
+								<a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = tour.Id, userId = userId })" class="btn btn-success">Book</a>
+							}
+							else
+							{
+								<a href="@Url.Action("Register", "Home")" class="btn btn-success">Register and Book</a>
+							}
 						</div>
 					</div>
 				</div>
@@ -108,7 +132,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Agency Tours Card -->
+	<!-- Travel Package Card -->
 	<div class="col-md-6 mb-4">
 		<div class="card shadow-sm border-0 h-100">
 			<img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
@@ -118,7 +142,7 @@
 				<p class="card-text">
 					Find curated packages from our partner agencies for every travel style.
 				</p>
-				<a href="@Url.Action("Index", "TravelPackage")" class="btn btn-outline-success">Browse Travel Packages</a>
+				<a href="@Url.Action("Book", "TravelPackages")" class="btn btn-outline-success">Browse Travel Packages</a>
 			</div>
 		</div>
 	</div>
@@ -194,14 +218,15 @@
 			<p style="max-width: 600px; margin: 0 auto; font-size:1.2rem;">
 				Sign up or log in to start booking your dream adventures. Discover destinations, guided tours, and exclusive agency offers—all in one platform!
 			</p>
-			<a href="/Home/Register" class="btn btn-primary btn-lg mt-3">Get Started</a>
+			<a href="/Home/Register" class="btn btn-primary btn-lg mt-3">Register Now to Get Started</a>
 		</div>
 	</div>
 </div>
 
-@if (User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated && User.IsInRole("Tourist"))
 {
-	<form asp-action="Personal" asp-controller="GuidedTourBooking" method="post">
-		<button type="submit" class="btn btn-primary">View My Bookings</button>
+	<form asp-action="Combined" asp-controller="CombinedBookings" method="post">
+		<button type="submit" class="btn btn-primary">View All Bookings</button>
 	</form>
+	
 }

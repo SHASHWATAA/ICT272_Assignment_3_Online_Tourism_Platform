@@ -4,4 +4,6 @@ public class HomeIndexViewModel
 {
     public List<FeaturedGuidedTours> FeaturedTours { get; set; }
     public List<GuidedToursDate> UpcomingTours { get; set; }
+    
+    public List<User> User { get; set; }
 }

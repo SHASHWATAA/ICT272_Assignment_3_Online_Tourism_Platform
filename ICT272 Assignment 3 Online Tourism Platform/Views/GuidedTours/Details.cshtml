@@ -66,9 +66,17 @@
         </dd>
     </dl>
 
-    <div class="mt-4">
-        <a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = Model.Id })" class="btn btn-success">Book This Tour</a>
-    </div>
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Tourist"))
+    {
+        <div class="mt-4">
+            <a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = Model.Id })" class="btn btn-success">Book This Tour</a>
+        </div>
+    }
+    else
+    {
+        <a href="@Url.Action("Register", "Home")" class="btn btn-success">Register and Book</a>
+    }
+  
 </div>
 
 @if (userRole is "Admin")
