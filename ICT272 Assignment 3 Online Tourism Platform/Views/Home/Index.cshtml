@@ -154,3 +154,9 @@
 	</div>
 </div>
 
+@if (User.Identity.IsAuthenticated)
+{
+	<form asp-action="Personal" asp-controller="GuidedTourBooking" method="post">
+		<button type="submit" class="btn btn-primary">View My Bookings</button>
+	</form>
+}

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ICT272_Assignment_3_Online_Tourism_Platform.Data;
 using ICT272_Assignment_3_Online_Tourism_Platform.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
 {
@@ -34,6 +35,31 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
 
             return View(await bookings.ToListAsync());
             
+        }
+        
+        // POST: GuidedTourBooking/Personal
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Personal()
+        {
+            var userIdClaim = User.FindFirst("UserId")?.Value;
+
+            if (string.IsNullOrEmpty(userIdClaim) || !int.TryParse(userIdClaim, out int userId))
+            {
+                return Unauthorized(); // or redirect to login
+            }
+
+            var bookings = await _context.GuidedTourBooking
+                .Include(b => b.User)
+                .Include(b => b.GuidedToursDate)
+                .ThenInclude(gtd => gtd.GuidedTours)
+                .Include(b => b.GuidedToursDate)
+                .ThenInclude(gtd => gtd.TourGuideAgency)
+                .ThenInclude(tga => tga.User)
+                .Where(b => b.UserId == userId)
+                .ToListAsync();
+
+            return View(bookings);
         }
 
         // GET: GuidedTourBooking/Details/5
@@ -113,20 +139,24 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
                 return NotFound();
             }
 
-            var guidedTourBooking = await _context.GuidedTourBooking.FindAsync(id);
+            var guidedTourBooking = await _context.GuidedTourBooking
+                .Include(g => g.GuidedToursDate)
+                .FirstOrDefaultAsync(g => g.Id == id);
+
             if (guidedTourBooking == null)
             {
                 return NotFound();
             }
-            
-            var guidedToursDates = _context.GuidedToursDate
-                .Include(g => g.GuidedTours)
-                .ToList();
-            
-            ViewData["GuidedToursDateId"] = new SelectList(_context.GuidedToursDate, "Id", "GuidedTours.Title", guidedTourBooking.GuidedToursDateId);
-            ViewData["UserId"] = new SelectList(_context.User, "Id", "Email", guidedTourBooking.UserId);
+
+            ViewBag.PreselectedUserId = guidedTourBooking.UserId;
+            ViewBag.PreselectedTourId = guidedTourBooking.GuidedToursDate?.GuidedToursId;
+
+            ViewBag.UserId = new SelectList(_context.User, "Id", "Email", guidedTourBooking.UserId);
+            ViewBag.GuidedTours = new SelectList(_context.GuidedTours, "Id", "Title");
+
             return View(guidedTourBooking);
         }
+
 
         // POST: GuidedTourBooking/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
