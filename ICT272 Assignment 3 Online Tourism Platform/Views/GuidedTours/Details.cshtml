@@ -1,8 +1,25 @@
 @model ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTours
+@inject ICT272_Assignment_3_Online_Tourism_Platform.Data.ICT272_Assignment_3_Online_Tourism_PlatformContext _context
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    string userRole = null;
+    User currentUser = null;
+
+    if (User.Identity.IsAuthenticated)
+    {
+        var email = User.Identity.Name;
+        currentUser = _context.User.FirstOrDefault(u => u.Email == email);
+
+        if (currentUser != null)
+        {
+            userRole = currentUser.Role;
+        }
+    }
 }
 
 <h1>Details</h1>
@@ -48,8 +65,16 @@
             @Html.DisplayFor(model => model.MaxGroupSize)
         </dd>
     </dl>
+
+    <div class="mt-4">
+        <a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = Model.Id })" class="btn btn-success">Book This Tour</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@if (userRole is "Admin")
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
