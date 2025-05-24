@@ -48,25 +48,11 @@ public class HomeController : Controller
             user.Password = GetMd5Hash(user.Password);
             _context.User.Add(user);
             _context.SaveChanges();
-
-            //   Assign User a TouristId
-            if (user.Role == "Tourist")
-            {
-                // Create Tourist record for this user
-                var tourist = new Tourist
-                {
-                    UserId = user.Id
-                    // Set any other properties if needed
-                };
-                _context.Tourist.Add(tourist);
-                _context.SaveChanges();
-            }
-
-
             return RedirectToAction("Login");
         }
         return View(user);
     }
+
     
     private string GetMd5Hash(string input)
     {

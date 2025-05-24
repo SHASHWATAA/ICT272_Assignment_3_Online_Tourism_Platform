@@ -1,4 +1,24 @@
-﻿<!DOCTYPE html>
+﻿@inject ICT272_Assignment_3_Online_Tourism_Platform.Data.ICT272_Assignment_3_Online_Tourism_PlatformContext _context
+
+@{
+	string userRole = null;
+	User currentUser = null;
+
+	if (User.Identity.IsAuthenticated)
+	{
+		var email = User.Identity.Name;
+		currentUser = _context.User.FirstOrDefault(u => u.Email == email);
+
+		if (currentUser != null)
+		{
+			userRole = currentUser.Role;
+		}
+	}
+}
+
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -25,62 +45,64 @@
 	                <li class="nav-item">
 		                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 	                </li>
-					
-	                @* Show these links ONLY to logged-in users *@
-	                @if (User.Identity.IsAuthenticated) 
-	                
-	                {
-
-	                <li class="nav-item">
-		                <a class="nav-link" asp-controller="TravelPackages" asp-action="Index">Travel Packages</a>
-	                </li>
-	                <li class="nav-item">
-		                <a class="nav-link" asp-controller="TravelPackagesBooking" asp-action="Index">Travel Packages Booking</a>
-	                </li>
-	                <li class="nav-item">
-		                <a class="nav-link" asp-controller="TravelPackages" asp-action="Book">Book Travel Packages</a>
-	                </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="GuidedTours" asp-action="Index">Guided Tours</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="GuidedTourBooking" asp-action="Index">Guided Tours Bookings</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="GuidedTours" asp-action="Book">Book Guided Tours</a>
-                    </li>
-	                <li class="nav-item">
-		                <a class="nav-link" asp-controller="Feedback" asp-action="Index">Feedback</a>
-	                </li>
-	                <li class="nav-item">
-		                <a class="nav-link" asp-controller="Agency" asp-action="Index">Agencies</a>
-	                </li>
-	                
-	                <li class="nav-item">
-		                <a class="nav-link" asp-controller="TravelPackage" asp-action="AdminIndex">Admin Tours</a>
-	                </li>
-	                }
-					
 
 	                <li class="nav-item">
 		                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 	                </li>
+					
+	                @* Show these links ONLY to logged-in users *@
+	                @if (User.Identity.IsAuthenticated) {
+		                @if (userRole is "Admin") {
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="TravelPackages" asp-action="Index">Travel Packages</a>
+			                </li>
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="TravelPackagesBooking" asp-action="Index">Travel Packages Booking</a>
+			                </li>
+		                }
+
+		                @if (userRole is "Tourist" or "Admin") {
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="TravelPackages" asp-action="Book">Book Travel Packages</a>
+			                </li>
+		                }
+
+		                @if (userRole is "Admin") {
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="GuidedTours" asp-action="Index">Guided Tours</a>
+			                </li>
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="GuidedTourBooking" asp-action="Index">Guided Tours Bookings</a>
+			                </li>
+		                }
+
+		                @if (userRole is "Tourist" or "Admin") {
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="GuidedTours" asp-action="Book">Book Guided Tours</a>
+			                </li>
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="Feedback" asp-action="Index">Feedback</a>
+			                </li>
+		                }
+
+		                @if (userRole is "Agency" or "Admin") {
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="Agency" asp-action="Index">Agencies</a>
+			                </li>
+		                }
+
+		                @if (userRole is "Admin") {
+			                <li class="nav-item">
+				                <a class="nav-link" asp-controller="TravelPackage" asp-action="AdminIndex">Admin Tours</a>
+			                </li>
+						}
+	                }
+	                
 
 	                @* Auth section: Roles + Login/Logout/Register *@
 	                @if (User.Identity.IsAuthenticated)
 	                {
-		                if (User.IsInRole("Tourist"))
-		                {
-			                <li class="nav-item">Welcome, Tourist!</li>
-		                }
-		                else if (User.IsInRole("TourGuide"))
-		                {
-			                <li class="nav-item">Welcome, Tour Guide!</li>
-		                }
-		                else if (User.IsInRole("Agency"))
-		                {
-			                <li class="nav-item">Welcome, Agency!</li>
-		                }
+		                <li class="nav-item">Welcome, @currentUser.FullName (@userRole)!</li>
 		                <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link" })</li>
 	                }
 	                else
