@@ -52,12 +52,12 @@
 					
 	                @* Show these links ONLY to logged-in users *@
 	                @if (User.Identity.IsAuthenticated) {
-		                @if (userRole is "Admin") {
+		                @if (userRole is "Admin" or "Agency") {
 			                <li class="nav-item">
 				                <a class="nav-link" asp-controller="TravelPackages" asp-action="Index">Travel Packages</a>
 			                </li>
 			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="TravelPackagesBooking" asp-action="Index">Travel Packages Booking</a>
+				                <a class="nav-link" asp-controller="TravelPackagesBooking" asp-action="Index">Travel Packages Bookings</a>
 			                </li>
 		                }
 
@@ -67,7 +67,7 @@
 			                </li>
 		                }
 
-		                @if (userRole is "Admin") {
+		                @if (userRole is "Admin" or "Agency") {
 			                <li class="nav-item">
 				                <a class="nav-link" asp-controller="GuidedTours" asp-action="Index">Guided Tours</a>
 			                </li>
