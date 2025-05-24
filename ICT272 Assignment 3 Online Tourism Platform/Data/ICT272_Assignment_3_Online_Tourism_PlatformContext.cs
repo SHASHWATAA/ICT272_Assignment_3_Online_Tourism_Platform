@@ -30,6 +30,7 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Data
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackages> TravelPackages { get; set; } = default!;
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackagesDate> TravelPackagesDate { get; set; } = default!;
         public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackagesBooking> TravelPackagesBooking { get; set; } = default!;
+        public DbSet<ICT272_Assignment_3_Online_Tourism_Platform.Models.FeaturedGuidedTours> FeaturedGuidedTours { get; set; } = default!;
 
 
     }

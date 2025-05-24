@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ICT272_Assignment_3_Online_Tourism_Platform.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers;
 
@@ -23,7 +24,11 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var featuredTours = _context.FeaturedGuidedTours
+            .Include(f => f.GuidedTour)
+            .ToList();
+
+        return View(featuredTours);
     }
 
     public IActionResult Privacy()

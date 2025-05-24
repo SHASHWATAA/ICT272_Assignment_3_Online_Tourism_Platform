@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TravelPackage>
+﻿@model IEnumerable<FeaturedGuidedTours>
+
 @{
 	ViewData["Title"] = "Home";
 }
@@ -43,7 +44,7 @@
 				<img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80"
 				     class="card-img-top" alt="Agency Tours" style="height:220px;object-fit:cover;">
 				<div class="card-body">
-					<h4 class="card-title">Agency Tours</h4>
+					<h4 class="card-title">Travel Packages</h4>
 					<p class="card-text">
 						Find curated packages from our partner agencies for every travel style.
 					</p>
@@ -54,19 +55,29 @@
 	</div>
 
 
-	<h2 class="text-center mt-5">Featured Tours</h2>
+	<h2 class="text-center mt-5 " style="font-family:'Montserrat', Arial,sans-serif;">Featured Tours</h2>
 	<div class="row">
 		@if (Model != null && Model.Any())
 		{
-			foreach (var tour in Model)
+			foreach (var item in Model)
 			{
+				var tour = item.GuidedTour;
 				<div class="col-md-4">
-					<div class="card mb-4">
-						<img class="card-img-top" src="@tour.ImageUrl" alt="@tour.Title">
+					<div class="card mb-4 border-@(item.IsFeatured ? "warning" : "secondary")">
+						<img class="card-img-top" src="@tour.ImageUrl" style="height: 200px;object-fit: cover;" alt="@tour.Title">
 						<div class="card-body">
-							<h5 class="card-title">@tour.Title</h5>
+							<h5 class="card-title">
+								@tour.Title
+								@if (item.IsFeatured)
+								{
+									<span class="badge bg-warning text-dark">Featured</span>
+								}
+							</h5>
 							<p class="card-text">@tour.Description</p>
-							<a href="/TravelPackage/Details/@tour.Id" class="btn btn-primary">View Details</a>
+							<div class="d-flex justify-content-between">
+								<a href="/GuidedTours/Details/@tour.Id" class="btn btn-primary">View Details</a>
+								<a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = tour.Id })" class="btn btn-success">Book</a>
+							</div>
 						</div>
 					</div>
 				</div>
