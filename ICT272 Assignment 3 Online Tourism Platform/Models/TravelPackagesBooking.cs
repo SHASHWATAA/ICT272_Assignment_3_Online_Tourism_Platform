@@ -20,4 +20,7 @@ public class TravelPackagesBooking
     public TravelPackagesDate TravelPackagesDate { get; set; }
 
     public DateTime BookingDate { get; set; } = DateTime.Now;
+    
+    public BookingFeedback? BookingFeedback { get; set; }
+
 }

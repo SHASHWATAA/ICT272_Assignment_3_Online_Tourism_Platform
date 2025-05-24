@@ -28,6 +28,12 @@
             <th>
                 Booking Made
             </th>
+            <th>
+                Rating
+            </th>
+            <th>
+                Feedback
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -48,6 +54,16 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+            <td>
+                @{
+                    var rating = item.BookingFeedback?.Rating ?? 0;
+                    var stars = new string('\u2b50', rating) + new string('☆', 5 - rating);
+                }
+                @stars
+            </td>
+            <td>
+                @(item.BookingFeedback?.FeedbackText ?? "-")
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

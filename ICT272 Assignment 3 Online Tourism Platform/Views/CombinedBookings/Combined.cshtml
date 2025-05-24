@@ -15,6 +15,8 @@
         <th>Tour Guide</th>
         <th>Tour Date</th>
         <th>Booking Made</th>
+        <th>Rating</th>
+        <th>Feedback</th>
         <th></th>
     </tr>
     </thead>
@@ -28,9 +30,32 @@
             <td>@item.GuidedToursDate.Date.ToShortDateString()</td>
             <td>@item.BookingDate.ToShortDateString()</td>
             <td>
+                @{
+                    var rating = item.BookingFeedback?.Rating ?? 0;
+                    var stars = new string('\u2b50', rating) + new string('☆', 5 - rating);
+                }
+                @stars
+            </td>
+            <td>
+                @(item.BookingFeedback?.FeedbackText ?? "-")
+            </td>
+            <td>
                 <a asp-controller="GuidedTourBooking" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-controller="GuidedTourBooking" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-controller="GuidedTourBooking" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-controller="GuidedTourBooking" asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+            
+                @if (item.BookingFeedback == null)
+                {
+                    <a asp-controller="BookingFeedback" asp-action="Create"
+                       asp-route-bookingType="Travel"
+                       asp-route-bookingId="@item.Id">Add Feedback</a>
+                }
+                else
+                {
+                    <a asp-controller="BookingFeedback" asp-action="Edit"
+                       asp-route-id="@item.BookingFeedback.Id">Edit Feedback</a>
+                }
+            
             </td>
         </tr>
     }
@@ -47,6 +72,8 @@
         <th>Tour Guide</th>
         <th>Package Date</th>
         <th>Booking Made</th>
+        <th>Rating</th>
+        <th>Feedback</th>
         <th></th>
     </tr>
     </thead>
@@ -60,9 +87,31 @@
             <td>@item.TravelPackagesDate.Date.ToShortDateString()</td>
             <td>@item.BookingDate.ToShortDateString()</td>
             <td>
+                @{
+                    var rating = item.BookingFeedback?.Rating ?? 0;
+                    var stars = new string('\u2b50', rating) + new string('☆', 5 - rating);
+                }
+                @stars
+            </td>
+            <td>
+                @(item.BookingFeedback?.FeedbackText ?? "-")
+            </td>
+            <td>
                 <a asp-controller="TravelPackagesBooking" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-controller="TravelPackagesBooking" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-controller="TravelPackagesBooking" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-controller="TravelPackagesBooking" asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+
+                @if (item.BookingFeedback == null)
+                {
+                    <a asp-controller="BookingFeedback" asp-action="Create"
+                       asp-route-bookingType="Travel"
+                       asp-route-bookingId="@item.Id">Add Feedback</a>
+                }
+                else
+                {
+                    <a asp-controller="BookingFeedback" asp-action="Edit"
+                       asp-route-id="@item.BookingFeedback.Id">Edit Feedback</a>
+                }
             </td>
         </tr>
     }

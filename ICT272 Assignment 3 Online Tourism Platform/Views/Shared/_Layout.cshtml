@@ -80,8 +80,13 @@
 			                <li class="nav-item">
 				                <a class="nav-link" asp-controller="GuidedTours" asp-action="Book">Book Guided Tours</a>
 			                </li>
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="Feedback" asp-action="Index">Feedback</a>
+		                }
+		                @if (userRole is "Tourist")
+		                {
+			                <li>
+				                <form asp-action="Combined" asp-controller="CombinedBookings" method="post">
+					                <button type="submit" class="btn btn-primary">View My Bookings and FeedBack</button>
+				                </form>
 			                </li>
 		                }
 
@@ -102,7 +107,7 @@
 	                @* Auth section: Roles + Login/Logout/Register *@
 	                @if (User.Identity.IsAuthenticated)
 	                {
-		                <li class="nav-item">Welcome, @currentUser.FullName (@userRole)!</li>
+		                <li class="nav-item"><a class="nav-link text-dark">Welcome, @currentUser.FullName (@userRole)!</a></li>
 		                <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link" })</li>
 	                }
 	                else

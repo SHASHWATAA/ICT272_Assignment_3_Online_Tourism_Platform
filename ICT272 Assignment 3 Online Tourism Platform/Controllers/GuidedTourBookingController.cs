@@ -31,7 +31,8 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
                     .ThenInclude(gtd => gtd.GuidedTours)
                 .Include(b => b.GuidedToursDate)
                     .ThenInclude(gtd => gtd.TourGuideAgency)
-                        .ThenInclude(tga => tga.User);
+                        .ThenInclude(tga => tga.User)
+                .Include(b => b.BookingFeedback);
 
             return View(await bookings.ToListAsync());
             
@@ -56,6 +57,7 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
                 .Include(b => b.GuidedToursDate)
                 .ThenInclude(gtd => gtd.TourGuideAgency)
                 .ThenInclude(tga => tga.User)
+                .Include(b => b.BookingFeedback)
                 .Where(b => b.UserId == userId)
                 .ToListAsync();
 
