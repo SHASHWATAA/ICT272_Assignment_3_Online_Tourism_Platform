@@ -153,6 +153,35 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Migrations
                     b.ToTable("BookingFeedback");
                 });
 
+            modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.BookingStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ConfirmationStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("GuidedTourBookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("TravelPackagesBookingId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GuidedTourBookingId")
+                        .IsUnique();
+
+                    b.HasIndex("TravelPackagesBookingId")
+                        .IsUnique();
+
+                    b.ToTable("BookingStatus");
+                });
+
             modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.FeaturedGuidedTours", b =>
                 {
                     b.Property<int>("Id")
@@ -537,6 +566,21 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Migrations
                     b.Navigation("TravelPackagesBooking");
                 });
 
+            modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.BookingStatus", b =>
+                {
+                    b.HasOne("ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTourBooking", "GuidedTourBooking")
+                        .WithOne("BookingStatus")
+                        .HasForeignKey("ICT272_Assignment_3_Online_Tourism_Platform.Models.BookingStatus", "GuidedTourBookingId");
+
+                    b.HasOne("ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackagesBooking", "TravelPackagesBooking")
+                        .WithOne("BookingStatus")
+                        .HasForeignKey("ICT272_Assignment_3_Online_Tourism_Platform.Models.BookingStatus", "TravelPackagesBookingId");
+
+                    b.Navigation("GuidedTourBooking");
+
+                    b.Navigation("TravelPackagesBooking");
+                });
+
             modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.FeaturedGuidedTours", b =>
                 {
                     b.HasOne("ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTours", "GuidedTour")
@@ -684,6 +728,8 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Migrations
             modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.GuidedTourBooking", b =>
                 {
                     b.Navigation("BookingFeedback");
+
+                    b.Navigation("BookingStatus");
                 });
 
             modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.Tourist", b =>
@@ -707,6 +753,8 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Migrations
             modelBuilder.Entity("ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackagesBooking", b =>
                 {
                     b.Navigation("BookingFeedback");
+
+                    b.Navigation("BookingStatus");
                 });
 #pragma warning restore 612, 618
         }

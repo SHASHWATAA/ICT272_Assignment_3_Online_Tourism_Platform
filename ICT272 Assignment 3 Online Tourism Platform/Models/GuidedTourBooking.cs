@@ -22,4 +22,6 @@ public class GuidedTourBooking
     public DateTime BookingDate { get; set; } = DateTime.Now;
     
     public BookingFeedback? BookingFeedback { get; set; }
+    
+    public BookingStatus? BookingStatus { get; set; }
 }

@@ -32,7 +32,8 @@ namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers
                 .Include(b => b.TravelPackagesDate)
                 .ThenInclude(gtd => gtd.Agency)
                 .ThenInclude(tga => tga.User)
-                .Include(b => b.BookingFeedback);
+                .Include(b => b.BookingFeedback)
+                .Include(b => b.BookingStatus);
 
             return View(await bookings.ToListAsync());
             
