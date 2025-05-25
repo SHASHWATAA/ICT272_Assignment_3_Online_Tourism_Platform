@@ -23,10 +23,10 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - ICT272_Assignment_3_Online_Tourism_Platform</title>
+    <title>@ViewData["Title"] - Tourism Platform</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/ICT272_Assignment_3_Online_Tourism_Platform.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400&display=swap" rel="stylesheet">
 
@@ -34,90 +34,99 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ICT272_Assignment_3_Online_Tourism_Platform</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-	                <li class="nav-item">
-		                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-	                </li>
+	    <div class="container-fluid">
+		    <img src="~/logo.png" alt="Logo" style="width: 100px; height: 100px; padding: 10px"/>
+		    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Tourism Platform</a>
+		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+		            aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+			    <ul class="navbar-nav flex-grow-1">
+				    <li class="nav-item">
+					    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+				    </li>
 
-	                <li class="nav-item">
-		                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-	                </li>
-					
-	                @* Show these links ONLY to logged-in users *@
-	                @if (User.Identity.IsAuthenticated) {
-		                @if (userRole is "Admin" or "Agency") {
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="TravelPackages" asp-action="Index">Travel Packages</a>
-			                </li>
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="TravelPackagesBooking" asp-action="Index">Travel Packages Bookings</a>
-			                </li>
-		                }
+				    <li class="nav-item">
+					    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+				    </li>
 
-		                @if (userRole is "Tourist" or "Admin") {
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="TravelPackages" asp-action="Book">Book Travel Packages</a>
-			                </li>
-		                }
+				    @* Show these links ONLY to logged-in users *@
+				    @if (User.Identity.IsAuthenticated)
+				    {
+					    @if (userRole is "Admin" or "Agency")
+					    {
+						    <li class="nav-item">
+							    <a class="nav-link" asp-controller="TravelPackages" asp-action="Index">Travel Packages</a>
+						    </li>
+						    <li class="nav-item">
+							    <a class="nav-link" asp-controller="TravelPackagesBooking" asp-action="Index">Travel Packages Bookings</a>
+						    </li>
+					    }
 
-		                @if (userRole is "Admin" or "Agency") {
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="GuidedTours" asp-action="Index">Guided Tours</a>
-			                </li>
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="GuidedTourBooking" asp-action="Index">Guided Tours Bookings</a>
-			                </li>
-		                }
+					    @if (userRole is "Tourist" or "Admin")
+					    {
+						    <li class="nav-item">
+							    <a class="nav-link" asp-controller="TravelPackages" asp-action="Book">Book Travel Packages</a>
+						    </li>
+					    }
 
-		                @if (userRole is "Tourist" or "Admin") {
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="GuidedTours" asp-action="Book">Book Guided Tours</a>
-			                </li>
-		                }
-		                @if (userRole is "Tourist")
-		                {
-			                <li>
-				                <form asp-action="Combined"  asp-controller="CombinedBookings" method="post">
-					                <button type="submit" class="btn btn-primary">View My Bookings and FeedBack</button>
-				                </form>
-			                </li>
-		                }
+					    @if (userRole is "Admin" or "Agency")
+					    {
+						    <li class="nav-item">
+							    <a class="nav-link" asp-controller="GuidedTours" asp-action="Index">Guided Tours</a>
+						    </li>
+						    <li class="nav-item">
+							    <a class="nav-link" asp-controller="GuidedTourBooking" asp-action="Index">Guided Tours Bookings</a>
+						    </li>
+					    }
 
-		                @if (userRole is "Agency" or "Admin") {
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="Agency" asp-action="Index">Agencies</a>
-			                </li>
-		                }
+					    @if (userRole is "Tourist" or "Admin")
+					    {
+						    <li class="nav-item">
+							    <a class="nav-link" asp-controller="GuidedTours" asp-action="Book">Book Guided Tours</a>
+						    </li>
+					    }
 
-		                @if (userRole is "Admin") {
-			                <li class="nav-item">
-				                <a class="nav-link" asp-controller="TravelPackage" asp-action="AdminIndex">Admin Tours</a>
-			                </li>
-						}
-	                }
-	                
+					    @if (userRole is "Tourist")
+					    {
+						    <li>
+							    <form asp-action="Combined" asp-controller="CombinedBookings" method="post">
+								    <button type="submit" class="btn btn-primary">View My Bookings and FeedBack</button>
+							    </form>
+						    </li>
+					    }
 
-	                @* Auth section: Roles + Login/Logout/Register *@
-	                @if (User.Identity.IsAuthenticated)
-	                {
-		                <li class="nav-item"><a class="nav-link text-dark">Welcome, @currentUser.FullName (@userRole)!</a></li>
-		                <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link" })</li>
-	                }
-	                else
-	                {
-		                <li class="nav-item">@Html.ActionLink("Login", "Login", "Home", null, new { @class = "nav-link" })</li>
-		                <li class="nav-item">@Html.ActionLink("Register", "Register", "Home", null, new { @class = "nav-link" })</li>
-	                }
-                </ul>
-            </div>
-        </div>
+					    @if (userRole is "Agency" or "Admin")
+					    {
+						    <li class="nav-item">
+							    <a class="nav-link" asp-controller="Agency" asp-action="Index">Agencies</a>
+						    </li>
+					    }
+
+					    @if (userRole is "Admin")
+					    {
+						    <li class="nav-item">
+							    <a class="nav-link" asp-controller="TravelPackage" asp-action="AdminIndex">Admin Tours</a>
+						    </li>
+					    }
+				    }
+
+
+				    @* Auth section: Roles + Login/Logout/Register *@
+				    @if (User.Identity.IsAuthenticated)
+				    {
+					    <li class="nav-item"><a class="nav-link text-dark">Welcome, @currentUser.FullName (@userRole)!</a></li>
+					    <li class="nav-item">@Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "nav-link" })</li>
+				    }
+				    else
+				    {
+					    <li class="nav-item">@Html.ActionLink("Login", "Login", "Home", null, new { @class = "nav-link" })</li>
+					    <li class="nav-item">@Html.ActionLink("Register", "Register", "Home", null, new { @class = "nav-link" })</li>
+				    }
+			    </ul>
+		    </div>
+	    </div>
     </nav>
 </header>
 <div class="container">
