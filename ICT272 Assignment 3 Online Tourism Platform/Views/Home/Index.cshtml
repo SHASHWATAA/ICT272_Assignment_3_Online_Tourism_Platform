@@ -6,6 +6,44 @@
 @{
 	ViewData["Title"] = "Home";
 }
+<div style="
+    display: flex;
+    justify-content: center;
+">
+<table border="1" cellpadding="8" cellspacing="0">
+	<thead>
+	<tr>
+		<th></th>
+		<th>Family Name</th>
+		<th>Given Name(s)</th>
+		<th>Student ID</th>
+		<th>Tutorial Code</th>
+		<th>Contribution Percentage</th>
+		<th>Signature</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Student 1</td>
+		<td>Aryal</td>
+		<td>Shashwat</td>
+		<td>200239335</td>
+		<td>ICT272A.AY01.2F</td>
+		<td>50%</td>
+		<td>S.A</td>
+	</tr>
+	<tr>
+		<td>Student 2</td>
+		<td>Doulagianis</td>
+		<td>Vasilios</td>
+		<td>200299694</td>
+		<td>ICT272A.AY01.2F</td>
+		<td>50%</td>
+		<td>V.D</td>
+	</tr>
+	</tbody>
+</table>
+</div>
 
 <div class="container mt-4">
 	<div class="jumbotron bg-primary text-white p-5 rounded">
@@ -223,18 +261,18 @@
 	</div>
 </div>
 
-@if (User.Identity.IsAuthenticated && User.IsInRole("Tourist"))
-{
-	<form asp-action="Combined" asp-controller="CombinedBookings" method="post">
-		<button type="submit" class="btn btn-primary">View All Bookings</button>
-	</form>
-	
-	<form asp-action="Personal" asp-controller="TravelPackagesBooking" method="post">
-		<button type="submit" class="btn btn-primary">View TravelPackagesBooking</button>
-	</form>
-	
-	<form asp-action="Personal" asp-controller="GuidedTourBooking" method="post">
-		<button type="submit" class="btn btn-primary">View TravelPackagesBooking</button>
-	</form>
-	
-}
+@* @if (User.Identity.IsAuthenticated && User.IsInRole("Tourist")) *@
+@* { *@
+@* 	<form asp-action="Combined" asp-controller="CombinedBookings" method="post"> *@
+@* 		<button type="submit" class="btn btn-primary">View All Bookings</button> *@
+@* 	</form> *@
+@* 	 *@
+@* 	<form asp-action="Personal" asp-controller="TravelPackagesBooking" method="post"> *@
+@* 		<button type="submit" class="btn btn-primary">View TravelPackagesBooking</button> *@
+@* 	</form> *@
+@* 	 *@
+@* 	<form asp-action="Personal" asp-controller="GuidedTourBooking" method="post"> *@
+@* 		<button type="submit" class="btn btn-primary">View TravelPackagesBooking</button> *@
+@* 	</form> *@
+@* 	 *@
+@* } *@
