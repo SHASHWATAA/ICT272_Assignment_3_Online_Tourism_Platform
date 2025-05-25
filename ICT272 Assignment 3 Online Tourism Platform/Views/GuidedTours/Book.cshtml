@@ -4,7 +4,7 @@
 ViewData["Title"] = "Travel Packages";
 }
 
-<h2 class="mt-4 mb-4">Travel Packages</h2>
+<h2 class="mt-4 mb-4">Guided Tours</h2>
 <div class="row">
     @foreach (var guidedTour in Model)
     {
@@ -22,7 +22,16 @@ ViewData["Title"] = "Travel Packages";
                     <li class="list-group-item">Duration: <b>@guidedTour.DurationDays days</b></li>
                     <li class="list-group-item">Max Group Size: <b>@guidedTour.MaxGroupSize</b></li>
                 </ul>
-                <a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = guidedTour.Id })" class="btn btn-primary mt-auto">Book</a>
+
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Tourist"))
+                {
+                    <a href="@Url.Action("Create", "GuidedTourBooking", new { guidedTourId = guidedTour.Id })" class="btn btn-success mt-auto">Book</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Register", "Home")" class="btn btn-success">Register and Book</a>
+                }
+
             </div>
         </div>
     </div>

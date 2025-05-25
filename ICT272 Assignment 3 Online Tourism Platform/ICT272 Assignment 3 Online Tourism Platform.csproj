@@ -41,4 +41,8 @@
       <_ContentIncludedByDefault Remove="Views\TourGuideAgency\Index.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="ICT272_Assignment_3_Online_Tourism_PlatformContext-2ec8304e-4b36-40ff-86c6-359d63d0127d.db-wal" />
+    </ItemGroup>
+
 </Project>

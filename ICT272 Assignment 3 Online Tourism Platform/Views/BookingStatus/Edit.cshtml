@@ -1,0 +1,48 @@
+@model ICT272_Assignment_3_Online_Tourism_Platform.Models.BookingStatus
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>BookingStatus</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="ConfirmationStatus" class="control-label"></label>
+                <select asp-for="ConfirmationStatus" class="form-control" asp-items="ViewBag.ConfirmationStatusList"></select>
+                <span asp-validation-for="ConfirmationStatus" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PaymentStatus" class="control-label"></label>
+                <select asp-for="PaymentStatus" class="form-control" asp-items="ViewBag.PaymentStatusList"></select>
+                <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+            </div>
+
+            @if (ViewBag.BookingType == "Guided")
+            {
+                <input type="hidden" asp-for="GuidedTourBookingId" />
+            }
+            else if (ViewBag.BookingType == "Travel")
+            {
+                <input type="hidden" asp-for="TravelPackagesBookingId" />
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

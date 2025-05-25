@@ -28,6 +28,14 @@
             <th>
                 Booking Made
             </th>
+            <th>
+                Rating
+            </th>
+            <th>
+                Feedback
+            </th>
+            <th>Confirmation Status</th>
+            <th>Payment Status</th>
             <th></th>
         </tr>
     </thead>
@@ -50,9 +58,31 @@
                 @Html.DisplayFor(modelItem => item.BookingDate)
             </td>
             <td>
+                @{
+                    var rating = item.BookingFeedback?.Rating ?? 0;
+                    var stars = new string('\u2b50', rating) + new string('☆', 5 - rating);
+                }
+                @stars
+            </td>
+            <td>
+                @(item.BookingFeedback?.FeedbackText ?? "-")
+            </td>
+            <td>
+                @(item.BookingStatus?.PaymentStatus.ToString() ?? "-")
+            </td>
+            <td>
+                @(item.BookingStatus?.ConfirmationStatus.ToString() ?? "-")
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-controller="BookingStatus" asp-action="Create"
+                   asp-route-bookingId="@item.Id"
+                   asp-route-bookingType="Guided">Create Booking Status</a> |
+                <a asp-controller="BookingFeedback" asp-action="Create"
+                   asp-route-bookingId="@item.Id"
+                   asp-route-bookingType="Guided">Edit Feedback and Rating</a>
             </td>
         </tr>
 }

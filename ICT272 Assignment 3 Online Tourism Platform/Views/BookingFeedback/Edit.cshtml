@@ -1,0 +1,48 @@
+@model ICT272_Assignment_3_Online_Tourism_Platform.Models.BookingFeedback
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>BookingFeedback</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label"></label>
+                <input asp-for="Rating" class="form-control" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FeedbackText" class="control-label"></label>
+                <input asp-for="FeedbackText" class="form-control" />
+                <span asp-validation-for="FeedbackText" class="text-danger"></span>
+            </div>
+
+            @if (ViewBag.BookingType == "Guided")
+            {
+                <input type="hidden" asp-for="GuidedTourBookingId" />
+            }
+            else if (ViewBag.BookingType == "Travel")
+            {
+                <input type="hidden" asp-for="TravelPackagesBookingId" />
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

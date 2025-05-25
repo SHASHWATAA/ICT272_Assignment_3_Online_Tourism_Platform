@@ -1,0 +1,69 @@
+@model IEnumerable<ICT272_Assignment_3_Online_Tourism_Platform.ViewModels.TravelPackageWithBookingCount>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Package.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Package.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Package.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Package.DurationDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Package.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Package.MaxGroupSize)
+            </th>
+            <th>Booking Count</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Package.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Package.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Package.ImageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Package.DurationDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Package.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Package.MaxGroupSize)
+            </td>
+            <td>@item.BookingCount</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Package.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Package.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Package.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

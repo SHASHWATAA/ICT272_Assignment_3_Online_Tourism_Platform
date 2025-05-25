@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ICT272_Assignment_3_Online_Tourism_Platform.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 
 namespace ICT272_Assignment_3_Online_Tourism_Platform.Controllers;
 
@@ -23,8 +24,26 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var featuredTours = _context.FeaturedGuidedTours
+            .Include(f => f.GuidedTour)
+            .ToList();
+
+        var upcomingTours = _context.GuidedToursDate
+            .Include(gtd => gtd.GuidedTours)
+            .Where(gtd => gtd.Date >= DateTime.Today)
+            .OrderBy(gtd => gtd.Date)
+            .Take(3)
+            .ToList();
+
+        var viewModel = new HomeIndexViewModel
+        {
+            FeaturedTours = featuredTours,
+            UpcomingTours = upcomingTours
+        };
+
+        return View(viewModel);
     }
+
 
     public IActionResult Privacy()
     {
@@ -48,25 +67,11 @@ public class HomeController : Controller
             user.Password = GetMd5Hash(user.Password);
             _context.User.Add(user);
             _context.SaveChanges();
-
-            //   Assign User a TouristId
-            if (user.Role == "Tourist")
-            {
-                // Create Tourist record for this user
-                var tourist = new Tourist
-                {
-                    UserId = user.Id
-                    // Set any other properties if needed
-                };
-                _context.Tourist.Add(tourist);
-                _context.SaveChanges();
-            }
-
-
             return RedirectToAction("Login");
         }
         return View(user);
     }
+
     
     private string GetMd5Hash(string input)
     {
@@ -101,7 +106,7 @@ public class HomeController : Controller
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-            return RedirectToAction("Index", "User");
+            return RedirectToAction("Index", "Home");
         }
 
         ViewBag.Error = "Invalid credentials";

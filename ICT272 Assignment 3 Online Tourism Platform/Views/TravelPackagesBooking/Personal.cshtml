@@ -1,0 +1,53 @@
+@model IEnumerable<ICT272_Assignment_3_Online_Tourism_Platform.Models.TravelPackagesBooking>
+
+@{
+    ViewData["Title"] = "Your Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Your Travel Package Bookings</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.User)</th>
+        <th>@Html.DisplayNameFor(model => model.TravelPackagesDate.TravelPackages.Title)</th>
+        <th>Tour Guide</th>
+        <th>Booking Date</th>
+        <th>Booking Made</th>
+        <th>Rating</th>
+        <th>Feedback</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.User.FullName)</td>
+            <td>@Html.DisplayFor(modelItem => item.TravelPackagesDate.TravelPackages.Title)</td>
+            <td>@Html.DisplayFor(modelItem => item.TravelPackagesDate.Agency.User.FullName)</td>
+            <td>@Html.DisplayFor(modelItem => item.TravelPackagesDate.Date)</td>
+            <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+            <td>
+                @{
+                    var rating = item.BookingFeedback?.Rating ?? 0;
+                    var stars = new string('\u2b50', rating) + new string('☆', 5 - rating);
+                }
+                @stars
+            </td>
+            <td>
+                @(item.BookingFeedback?.FeedbackText ?? "-")
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-controller="BookingFeedback" asp-action="Create"
+                   asp-route-bookingId="@item.Id"
+                   asp-route-bookingType="Travel">Add Feedback</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
